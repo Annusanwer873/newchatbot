@@ -63,6 +63,8 @@ class EmailSender:
 
     def send_email_to_support(self,cust_name,cust_email,cust_contact,course_name,body):
             try:
+                EMAIL_ADDRESS = 'siddiqamin2005@gmail.com'
+                EMAIL_PASSWORD = 'siddiq2020'
                 self.config_reader = ConfigReader()
                 self.configuration = self.config_reader.read_config()
 
@@ -81,35 +83,24 @@ class EmailSender:
 
                 body = body.replace('cust_name',cust_name)
                 body = body.replace('cust_contact', cust_contact)
-                body = body.replace('cust_email', cust_email)
-                body = body.replace('course_name', course_name)
+
 
                 # attach the body with the msg instance
                 self.msg.attach(MIMEText(body, 'html'))
 
                 # instance of MIMEBase and named as p
                 self.p = MIMEBase('application', 'octet-stream')
+                #txt = "Customer Name is {customer-name} and his Contactnumber is {contanct-no}"
+                #print(txt.format(customer-name=cust_name))
+
+                with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                    # smtp.login(self.msg['SENDER_EMAIL'], self.configuration['PASSWORD'])
+                    smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+                    # smtp.send_message(msg)
+                    smtp.sendmail(self.msg['From'],  self.support_team_email, self.text)
 
 
-                # creates SMTP session
-                self.smtp = smtplib.SMTP('smtp.gmail.com', 587)
 
-                # start TLS for security
-                self.smtp.starttls()
 
-                # Authentication
-                self.smtp.login(self.msg['From'], self.configuration['PASSWORD'])
-
-                # Converts the Multipart msg into a string
-                self.text = self.msg.as_string()
-
-                # sending the mail
-
-                self.support_team_email = self.configuration['SALES_TEAM_EMAIL']
-
-                self.smtp.sendmail(self.msg['From'], self.support_team_email, self.text)
-
-                # terminating the session
-                self.smtp.quit()
             except Exception as e:
                 print('the exception is ' + str(e))
