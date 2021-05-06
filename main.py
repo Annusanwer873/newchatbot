@@ -68,6 +68,18 @@ def processRequest(req):
             "fulfillmentText": fulfillmentText
         }
 
+    elif (intent == 'Contact Customer Support'):
+        #email_sender = EmailSender()
+        #template = template_reader.TemplateReader()
+        #email_message = template.read_course_template(course_name)
+        #email_sender.send_email_to_student(cust_email, email_message)
+
+        fulfillmentText = "Number has sent to the support team via email, you will be contacted shortly, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+
+        return {
+            "fulfillmentText": fulfillmentText
+        }
+
 
     else:
         return "nothing found"
