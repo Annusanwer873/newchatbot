@@ -157,7 +157,7 @@ def processRequest(req):
 
     elif (intent == 'Women-Shoes'):
         parameters = result.get("parameters")
-        Women_Shoes_Size = parameters.get("Women-Shoes_Size")
+        Women_Shoes_Size = parameters.get("Women-Shoes-Size")
 
         fulfillmentText = "ok4"
         return {
