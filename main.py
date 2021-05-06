@@ -68,12 +68,29 @@ def processRequest(req):
     elif (intent == 'Shirts-size'):
         parameters = result.get("parameters")
         cust_shirt_size = parameters.get("Size")
-        #print(cust_shirt_size)
-        str = "You have selected {customer_size} Shirt Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
-        str2 = str.format(customer_size = cust_shirt_size)
+        course_name = 'DataScienceMasters'
+        cust_email = 'aaaa'
+
+        email_sender = EmailSender()
+        template = template_reader.TemplateReader()
+        email_message = template.read_course_template(course_name)
+        #body = email_message
+
+        #email_sender.send_email_to_student(cust_email, email_message)
 
 
-        fulfillmentText = str2#"You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+
+
+
+
+
+
+
+        #str = "You have selected {customer_size} Shirt Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+        #str2 = str.format(customer_size = cust_shirt_size)
+
+
+        fulfillmentText = email_message#str2#"You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
 
         return {
             "fulfillmentText": fulfillmentText
