@@ -7,9 +7,6 @@ from flask import make_response
 from SendEmail.sendEmail import EmailSender
 from email_templates import template_reader
 import os
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
 
 
 
@@ -71,35 +68,13 @@ def processRequest(req):
     elif (intent == 'Shirts-size'):
         parameters = result.get("parameters")
         cust_shirt_size = parameters.get("Size")
-        course_name = 'DataScienceMasters'
-        cust_email = 'aaaa'
+        #print(cust_shirt_size)
 
-        email_sender = EmailSender()
-        template = template_reader.TemplateReader()
-        email_message = template.read_course_template(course_name)
-        message = email_message
-        msg = MIMEMultipart()
-
-        body = message
-        msg.attach(MIMEText(body, 'html'))
-
-        #body = email_message
-
-        #email_sender.send_email_to_student(cust_email, email_message)
+        str = "You have selected {customer_size} Shirt Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+        str2 = str.format(customer_size = cust_shirt_size)
 
 
-
-
-
-
-
-
-
-        #str = "You have selected {customer_size} Shirt Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
-        #str2 = str.format(customer_size = cust_shirt_size)
-
-
-        fulfillmentText = msg#str2#"You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+        fulfillmentText = str2#"You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
 
         return {
             "fulfillmentText": fulfillmentText
