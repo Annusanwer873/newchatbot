@@ -65,6 +65,63 @@ def processRequest(req):
             "fulfillmentText": fulfillmentText
         }
 
+    elif (intent == 'Shirts-size'):
+        parameters = result.get("parameters")
+        cust_shirt_size = parameters.get("Size")
+        #print(cust_shirt_size)
+        str = "You have selected {customer_size} Shirt Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+        str2 = str.format(customer_size = cust_shirt_size)
+
+
+        fulfillmentText = str2#"You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+
+        return {
+            "fulfillmentText": fulfillmentText
+        }
+
+    elif (intent == 'Pants-weist'):
+        parameters = result.get("parameters")
+        cust_pant_weist = parameters.get("Weist")
+        #cust_pant_weist2 = str(cust_pant_weist)
+        #print(cust_shirt_size)
+        str = "You have selected {customer_Weist_size} Pant Waist, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+        str2 = str.format(customer_Weist_size = cust_pant_weist)
+
+
+        fulfillmentText = str2#"You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+
+        return {
+            "fulfillmentText": fulfillmentText
+        }
+
+    elif (intent == 'ShalwarKurta-size'):
+        parameters = result.get("parameters")
+        cust_ShalwarKurta_size = parameters.get("Size")
+        #print(cust_shirt_size)
+        str = "You have selected {customer_size} Shalwar Kurta Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+        str2 = str.format(customer_size = cust_ShalwarKurta_size)
+
+
+        fulfillmentText = str2#"You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+
+        return {
+            "fulfillmentText": fulfillmentText
+        }
+
+    elif (intent == 'Shoe-Size'):
+        parameters = result.get("parameters")
+        cust_Shoe_size = parameters.get("Size")
+        #cust_Shoe_size = str(cust_Shoe_size)
+        # print(cust_shirt_size)
+        str = "You have selected {customer_shoe_size} shoes Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+        str2 = str.format(customer_shoe_size=cust_Shoe_size)
+
+        fulfillmentText = str2  # "You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+
+        return {
+            "fulfillmentText": fulfillmentText
+        }
+
 
     else:
         return "nothing found"
