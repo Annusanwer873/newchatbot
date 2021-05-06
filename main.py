@@ -124,6 +124,47 @@ def processRequest(req):
         }
 
 
+    elif (intent == 'Women-ShalwarKameez'):
+        parameters = result.get("parameters")
+        Women_ShalwarKameez_Size = parameters.get("Women-ShalwarKameez-Size")
+
+        fulfillmentText = "ok1"
+
+        return {
+            "fulfillmentText": fulfillmentText
+        }
+
+    elif (intent == 'Women-Bags'):
+        parameters = result.get("parameters")
+        Women_Bags_Color = parameters.get("Women-Bags-Color")
+
+
+        fulfillmentText = "ok2"
+
+        return {
+            "fulfillmentText": fulfillmentText
+        }
+
+    elif (intent == 'Women-Jeans'):
+        parameters = result.get("parameters")
+        Women_Jeans_Size = parameters.get("Women-Jeans-Size")
+
+        fulfillmentText = "ok3"
+
+        return {
+            "fulfillmentText": fulfillmentText
+        }
+
+    elif (intent == 'Women-Shoes'):
+        parameters = result.get("parameters")
+        Women_Shoes_Size = parameters.get("Women-Shoes_Size")
+
+        fulfillmentText = "ok4"
+        return {
+            "fulfillmentText": fulfillmentText
+        }
+
+
     else:
         return "nothing found"
 
