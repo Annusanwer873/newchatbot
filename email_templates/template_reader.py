@@ -6,9 +6,15 @@ class TemplateReader:
     def read_course_template(self,course_name):
         try:
             #email_file = open("email_templates/DSM_Template.html", "r")
-            email_file = open("email_templates/simple.html", "r")
-            email_message = email_file.read()
-            return email_message
+            if (course_name == 'DataScienceMasters'):
+                email_file = open("email_templates/simple.html", "r")
+                email_message = email_file.read()
+                return email_message
+
+            elif (course_name == 'DS'):
+                email_file = open("email_templates/Vision_Template.html", "r")
+                email_message = email_file.read()
+                return email_message
 
             # if (course_name=='DataScienceMasters'):
             #     email_file = open("email_templates/DSM_Template.html", "r")

@@ -11,6 +11,7 @@ class ConfigReader:
         # self.password = self.configuration['PASSWORD']
         # self.email_body = self.configuration['EMAIL_BODY']
         # self.email_subject = self.configuration['EMAIL_SUBJECT']
+        self.configuration['SALES_TEAM_EMAIL']
 
         return self.configuration
 

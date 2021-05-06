@@ -48,15 +48,16 @@ def processRequest(req):
         parameters = result.get("parameters")
         cust_name = parameters.get("name")
         cust_contactnumber = parameters.get("number")
+        converted_cust_num = str(cust_contactnumber)
 
         cust_email = 'affanaminn@gmail.com'
 
         email_sender = EmailSender()
         template = template_reader.TemplateReader()
-        course_name = 'DataScienceMasters'
+        course_name = 'DS'
         email_message = template.read_course_template(course_name)
         #        email_sender.send_email_to_student(cust_email, email_message)
-        email_sender.send_email_to_support(cust_email, email_message)
+        email_sender.send_email_to_support(cust_name,converted_cust_num,email_message )
 
         fulfillmentText = "Number has sent to the support team via email, you will be contacted shortly, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
 
