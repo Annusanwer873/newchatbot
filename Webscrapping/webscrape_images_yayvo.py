@@ -100,6 +100,6 @@ if __name__ == '__main__':
         i = i + 1
 
     yayvo_Scrapped = pd.DataFrame(get_data.get_data_dict())
-    yayvo_Scrapped = yayvo_Scrapped.head(51)
+    yayvo_Scrapped = yayvo_Scrapped.head(5)
     print("---------chkinggg -------------")
     print(yayvo_Scrapped.head())

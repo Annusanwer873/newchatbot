@@ -6,6 +6,7 @@ import json
 from flask import make_response
 from SendEmail.sendEmail import EmailSender
 from email_templates import template_reader
+from Webscrapping.webscrape_images_FMJ import DataCollection
 import os
 
 
@@ -68,17 +69,17 @@ def processRequest(req):
     elif (intent == 'Shirts-size'):
         parameters = result.get("parameters")
         cust_shirt_size = parameters.get("Size")
-        #print(cust_shirt_size)
 
+
+        data_scrapper_FMJ = DataCollection()
+        scrapped_data = data_scrapper_FMJ.FMJ_Scraped(intent,cust_shirt_size)
+        print(scrapped_data)
         str = "You have selected {customer_size} Shirt Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
         str2 = str.format(customer_size = cust_shirt_size)
-
-
         fulfillmentText = str2#"You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
-
         return {
-            "fulfillmentText": fulfillmentText
-        }
+        "fulfillmentText": fulfillmentText}
+
 
     elif (intent == 'Pants-weist'):
         parameters = result.get("parameters")
