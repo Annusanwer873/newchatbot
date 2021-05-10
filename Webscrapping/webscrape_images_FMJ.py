@@ -128,11 +128,10 @@ class DataCollection:
         print(yayvo_Scrapped.head())
         download_path = get_data.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
         #finish = time.perf_counter()
-        return yayvo_Scrapped
-
-        # return render_template('review.html',
-        #                        tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
-        #                        titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
-        #                        search_string=search_string,  # pass the search string
-        #                        download_csv=download_path  # pass the download path for csv
-        #                        )
+        #return yayvo_Scrapped
+        render_template('review.html',
+                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
+                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               search_string=search_string,  # pass the search string
+                               download_csv=download_path  # pass the download path for csv
+                               )
