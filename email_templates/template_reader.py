@@ -7,7 +7,7 @@ class TemplateReader:
         try:
             #email_file = open("email_templates/DSM_Template.html", "r")
             if (course_name == 'DataScienceMasters'):
-                email_file = open("email_templates/simple.html", "r")
+                email_file = open("email_templates/email_template.html", "r")
                 email_message = email_file.read()
                 return email_message
 
