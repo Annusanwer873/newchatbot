@@ -15,8 +15,6 @@ app = Flask(__name__)
 app.config['IMG_FOLDER'] = IMG_FOLDER
 app.config['CSV_FOLDER'] = CSV_FOLDER
 
-intent = "shirts"
-cust_shirt_size = "S"
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -81,17 +79,34 @@ def processRequest(req):
     elif (intent == 'Shirts-size'):
         parameters = result.get("parameters")
         cust_shirt_size = parameters.get("Size")
-        #index()
+        print(cust_shirt_size)
 
-        #data_scrapper_FMJ = DataCollection()
-        #scrapped_data = data_scrapper_FMJ.FMJ_Scraped(intent,cust_shirt_size)
-        #print(scrapped_data)
-        #str = "You have selected {customer_size} Shirt Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
-        #str2 = str.format(customer_size = cust_shirt_size)
-        fulfillmentText = "https://api-sendemails.herokuapp.com/review"#str2#"You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
-        return {
-        "fulfillmentText": fulfillmentText}
+        if(cust_shirt_size == 'S'):
+            str = "You have selected {customer_size} Shirt Size, Please Proceed with given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            str2 = str.format(customer_size=cust_shirt_size, link="https://api-sendemails.herokuapp.com/ShirtSizeSmall")
 
+            fulfillmentText = str2  # "You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            return {
+                "fulfillmentText": fulfillmentText}
+
+        elif (cust_shirt_size == 'M'):
+            str = "You have selected {customer_size} Shirt Size, Please Proceed with given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            str2 = str.format(customer_size=cust_shirt_size, link="https://api-sendemails.herokuapp.com/ShirtSizeMedium")
+
+            fulfillmentText = str2  # "You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            return {
+                "fulfillmentText": fulfillmentText}
+        elif (cust_shirt_size == 'L'):
+            str = "You have selected {customer_size} Shirt Size, Please Proceed with given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            str2 = str.format(customer_size=cust_shirt_size, link="https://api-sendemails.herokuapp.com/Large")
+
+            fulfillmentText = str2  # "You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            return {
+                "fulfillmentText": fulfillmentText}
+        else:
+            fulfillmentText = "We Donot have this Shirt Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            return {
+                "fulfillmentText": fulfillmentText}
 
     elif (intent == 'Pants-weist'):
         parameters = result.get("parameters")
@@ -189,13 +204,11 @@ def homePage():
 def index():
     #if request.method == 'POST':
     try:
-        print(intent)
-        print(cust_shirt_size)
-        search_string = intent
-        print(search_string)
-        #intent = 'Shirts-size'
-        #cust_shirt_size = 'M'
-        #search_string = 'shirts'
+        intent = 'Shirts-size'
+        cust_shirt_size = 'M'
+        search_string = 'shirts'
+
+
         data_scrapper_FMJ = DataCollection()
         yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
 
@@ -212,8 +225,87 @@ def index():
         print(e)
         return render_template("404.html")
 
-        #else:
-            #return render_template("index.html")
+@app.route('/ShirtSizeMedium', methods=("POST", "GET"))
+def ShirtSizeMedium():
+    #if request.method == 'POST':
+    try:
+        intent = 'Shirts-size'
+        cust_shirt_size = 'M'
+        search_string = 'shirts'
+
+
+        data_scrapper_FMJ = DataCollection()
+        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
+
+        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+
+        return render_template('review.html',
+                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
+                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               search_string=search_string,  # pass the search string
+                               download_csv=download_path  # pass the download path for csv
+                               )
+
+    except Exception as e:
+        print(e)
+        return render_template("404.html")
+
+@app.route('/ShirtSizeSmall', methods=("POST", "GET"))
+def ShirtSizeSmall():
+    #if request.method == 'POST':
+    try:
+        intent = 'Shirts-size'
+        cust_shirt_size = 'S'
+        search_string = 'shirts'
+        data_scrapper_FMJ = DataCollection()
+        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
+
+        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+
+        return render_template('review.html',
+                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
+                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               search_string=search_string,  # pass the search string
+                               download_csv=download_path  # pass the download path for csv
+                               )
+
+    except Exception as e:
+        print(e)
+        return render_template("404.html")
+
+@app.route('/ShirtSizeLarge', methods=("POST", "GET"))
+def ShirtSizeLarge():
+    #if request.method == 'POST':
+    try:
+
+        intent = 'Shirts-size'
+        cust_shirt_size = 'L'
+        search_string = 'shirts'
+        data_scrapper_FMJ = DataCollection()
+        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
+
+        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+
+        return render_template('review.html',
+                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
+                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               search_string=search_string,  # pass the search string
+                               download_csv=download_path  # pass the download path for csv
+                               )
+
+    except Exception as e:
+        print(e)
+        return render_template("404.html")
+
+
+
+
+
+
+
+
+
+
 
 
 
