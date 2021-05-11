@@ -8,12 +8,13 @@ from flask import Flask, render_template,  session, redirect, request
 from flask_cors import CORS,cross_origin
 
 # define global paths for Image and csv folders
+#IMG_FOLDER = os.path.join('static', 'images')
+#CSV_FOLDER = os.path.join('static', 'CSVs')
+#app = Flask(__name__)
+#app.config['IMG_FOLDER'] = IMG_FOLDER
+#app.config['CSV_FOLDER'] = CSV_FOLDER
 IMG_FOLDER = os.path.join('static', 'images')
 CSV_FOLDER = os.path.join('static', 'CSVs')
-app = Flask(__name__)
-app.config['IMG_FOLDER'] = IMG_FOLDER
-app.config['CSV_FOLDER'] = CSV_FOLDER
-
 
 class CleanCache:
     '''
@@ -94,11 +95,11 @@ class DataCollection:
 
 
     def save_as_dataframe(self, dataframe, fileName=None):
-        csv_path = os.path.join(app.config['CSV_FOLDER'], fileName)
+        csv_path = os.path.join(CSV_FOLDER, fileName)
         fileExtension = '.csv'
         final_path = f"{csv_path}{fileExtension}"
         # clean previous files -
-        CleanCache(directory=app.config['CSV_FOLDER'])
+        CleanCache(directory=CSV_FOLDER)
         # save new csv to the csv folder
         dataframe.to_csv(final_path, index=None)
         print("File saved successfully!!")
@@ -124,14 +125,15 @@ class DataCollection:
 
         yayvo_Scrapped = pd.DataFrame(get_data.get_data_dict())
         yayvo_Scrapped = yayvo_Scrapped.head(5)
-        print("---------chkinggg -------------")
-        print(yayvo_Scrapped.head())
-        download_path = get_data.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
-        #finish = time.perf_counter()
-        #return yayvo_Scrapped
-        render_template('review.html',
-                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
-                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
-                               search_string=search_string,  # pass the search string
-                               download_csv=download_path  # pass the download path for csv
-                               )
+        return yayvo_Scrapped
+        # print("---------chkinggg -------------")
+        # print(yayvo_Scrapped.head())
+        # download_path = get_data.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+        # #finish = time.perf_counter()
+        # #return yayvo_Scrapped
+        # render_template('review.html',
+        #                        tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
+        #                        titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+        #                        search_string=search_string,  # pass the search string
+        #                        download_csv=download_path  # pass the download path for csv
+        #                        )

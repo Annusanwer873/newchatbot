@@ -9,9 +9,12 @@ from email_templates import template_reader
 from Webscrapping.webscrape_images_FMJ import DataCollection
 import os
 
-
-
+IMG_FOLDER = os.path.join('static', 'images')
+CSV_FOLDER = os.path.join('static', 'CSVs')
 app = Flask(__name__)
+app.config['IMG_FOLDER'] = IMG_FOLDER
+app.config['CSV_FOLDER'] = CSV_FOLDER
+
 @app.route('/webhook', methods=['POST'])
 def webhook():
     #print("Affan here ........")
@@ -168,6 +171,36 @@ def processRequest(req):
 
     else:
         return "nothing found"
+
+@app.route('/',methods=['GET'])
+def homePage():
+	return render_template("index.html")
+
+@app.route('/review', methods=("POST", "GET"))
+def index():
+    #if request.method == 'POST':
+    try:
+        intent = 'Shirts-size'
+        cust_shirt_size = 'M'
+        search_string = 'shirts'
+        data_scrapper_FMJ = DataCollection()
+        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
+
+        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+
+        return render_template('review.html',
+                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
+                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               search_string=search_string,  # pass the search string
+                               download_csv=download_path  # pass the download path for csv
+                               )
+
+    except Exception as e:
+        print(e)
+        return render_template("404.html")
+
+        #else:
+            #return render_template("index.html")
 
 
 
