@@ -86,9 +86,9 @@ def processRequest(req):
         #data_scrapper_FMJ = DataCollection()
         #scrapped_data = data_scrapper_FMJ.FMJ_Scraped(intent,cust_shirt_size)
         #print(scrapped_data)
-        str = "You have selected {customer_size} Shirt Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
-        str2 = str.format(customer_size = cust_shirt_size)
-        fulfillmentText = str2#"You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+        #str = "You have selected {customer_size} Shirt Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+        #str2 = str.format(customer_size = cust_shirt_size)
+        fulfillmentText = "https://api-sendemails.herokuapp.com/review"#str2#"You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
         return {
         "fulfillmentText": fulfillmentText}
 
