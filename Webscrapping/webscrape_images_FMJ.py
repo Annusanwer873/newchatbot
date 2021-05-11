@@ -105,14 +105,15 @@ class DataCollection:
         print("File saved successfully!!")
         return final_path
 
-    def FMJ_Scraped(self,intent,cust_shirt_size):
+    def FMJ_Scraped(self,intent,search_string,size,cat):
+        #(intent, search_string, cust_ShalwarKurta_size, cat)
 
         base_URL = 'http://fmjclothing.jhapto.com/'
 
         #if (intent == 'Shirts-size'):
             #http: // fmjclothing.jhapto.com / product - category / men / shirts /
-        cat = 'men'
-        search_string = 'shirts'
+        #cat = 'men'
+        #search_string = 'shirts'
         search_string = search_string.replace(" ", "-")
         print('processing, Please wait')
         get_data = DataCollection()
@@ -124,7 +125,7 @@ class DataCollection:
             i = i + 1
 
         yayvo_Scrapped = pd.DataFrame(get_data.get_data_dict())
-        yayvo_Scrapped = yayvo_Scrapped.head(5)
+        #yayvo_Scrapped = yayvo_Scrapped.head(15)
         return yayvo_Scrapped
         # print("---------chkinggg -------------")
         # print(yayvo_Scrapped.head())

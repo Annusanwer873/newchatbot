@@ -162,10 +162,12 @@ def ShirtSizeMedium():
         intent = 'Shirts-size'
         cust_shirt_size = 'M'
         search_string = 'shirts'
+        cat = 'men'
 
 
         data_scrapper_FMJ = DataCollection()
-        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
+        #yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
+        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, cust_shirt_size, cat)
 
         download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
 
@@ -187,8 +189,10 @@ def ShirtSizeSmall():
         intent = 'Shirts-size'
         cust_shirt_size = 'S'
         search_string = 'shirts'
+        cat = 'men'
         data_scrapper_FMJ = DataCollection()
-        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
+        #yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
+        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, cust_shirt_size, cat)
 
         download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
 
@@ -211,8 +215,10 @@ def ShirtSizeLarge():
         intent = 'Shirts-size'
         cust_shirt_size = 'L'
         search_string = 'shirts'
+        cat = 'men'
         data_scrapper_FMJ = DataCollection()
-        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
+        #yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
+        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, cust_shirt_size, cat)
 
         download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
 
@@ -236,13 +242,16 @@ def ShirtSizeLarge():
 def ShalwarKurtaSizeMedium():
     #if request.method == 'POST':
     try:
+
+
         intent = 'ShalwarKurta-size'
-        cust_shirt_size = 'M'
+        cust_ShalwarKurta_size = 'M'
         search_string = 'Shalwar Kurta'
+        cat = 'men'
 
 
         data_scrapper_FMJ = DataCollection()
-        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
+        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, cust_ShalwarKurta_size,cat)
 
         download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
 
@@ -263,12 +272,13 @@ def ShalwarKurtaSizeLarge():
     #if request.method == 'POST':
     try:
         intent = 'ShalwarKurta-size'
-        cust_shirt_size = 'L'
+        cust_ShalwarKurta_size = 'L'
         search_string = 'Shalwar Kurta'
+        cat = 'men'
 
 
         data_scrapper_FMJ = DataCollection()
-        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
+        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, cust_ShalwarKurta_size, cat)
 
         download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
 
