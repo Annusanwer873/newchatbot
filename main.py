@@ -82,7 +82,7 @@ def processRequest(req):
         print(cust_shirt_size)
 
         if(cust_shirt_size == 'S'):
-            str = "You have selected {customer_size} Shirt Size, Please Proceed with given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            str = "You have selected {customer_size} Shirt Size, Please Proceed to our FMJ Recommendation engine through given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
             str2 = str.format(customer_size=cust_shirt_size, link="https://api-sendemails.herokuapp.com/ShirtSizeSmall")
 
             fulfillmentText = str2  # "You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
@@ -90,14 +90,14 @@ def processRequest(req):
                 "fulfillmentText": fulfillmentText}
 
         elif (cust_shirt_size == 'M'):
-            str = "You have selected {customer_size} Shirt Size, Please Proceed with given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            str = "You have selected {customer_size} Shirt Size, Please Proceed to our FMJ Recommendation engine through given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
             str2 = str.format(customer_size=cust_shirt_size, link="https://api-sendemails.herokuapp.com/ShirtSizeMedium")
 
             fulfillmentText = str2  # "You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
             return {
                 "fulfillmentText": fulfillmentText}
         elif (cust_shirt_size == 'L'):
-            str = "You have selected {customer_size} Shirt Size, Please Proceed with given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            str = "You have selected {customer_size} Shirt Size, Please Proceed to our FMJ Recommendation engine through given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
             str2 = str.format(customer_size=cust_shirt_size, link="https://api-sendemails.herokuapp.com/Large")
 
             fulfillmentText = str2  # "You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
@@ -108,48 +108,47 @@ def processRequest(req):
             return {
                 "fulfillmentText": fulfillmentText}
 
-    elif (intent == 'Pants-weist'):
-        parameters = result.get("parameters")
-        cust_pant_weist = parameters.get("Weist")
-        #cust_pant_weist2 = str(cust_pant_weist)
-        #print(cust_shirt_size)
-        str = "You have selected {customer_Weist_size} Pant Waist, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
-        str2 = str.format(customer_Weist_size = cust_pant_weist)
-
-
-        fulfillmentText = str2#"You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
-
-        return {
-            "fulfillmentText": fulfillmentText
-        }
 
     elif (intent == 'ShalwarKurta-size'):
         parameters = result.get("parameters")
         cust_ShalwarKurta_size = parameters.get("Size")
         #print(cust_shirt_size)
-        str = "You have selected {customer_size} Shalwar Kurta Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
-        str2 = str.format(customer_size = cust_ShalwarKurta_size)
 
 
-        fulfillmentText = str2#"You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+        if (cust_ShalwarKurta_size == 'M'):
+            str = "You have selected {customer_size} Shirt Size, Please Proceed to our FMJ Recommendation engine through given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            str2 = str.format(customer_size=cust_ShalwarKurta_size,
+                              link="https://api-sendemails.herokuapp.com/ShalwarKurtaSizeMedium")
 
-        return {
-            "fulfillmentText": fulfillmentText
-        }
+            fulfillmentText = str2  # "You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            return {
+                "fulfillmentText": fulfillmentText}
+        elif (cust_ShalwarKurta_size == 'L'):
+            str = "You have selected {customer_size} Shirt Size, Please Proceed to our FMJ Recommendation engine through given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            str2 = str.format(customer_size=cust_ShalwarKurta_size, link="https://api-sendemails.herokuapp.com/ShalwarKurtaSizeLarge")
 
-    elif (intent == 'Shoe-Size'):
-        parameters = result.get("parameters")
-        cust_Shoe_size = parameters.get("Size")
-        #cust_Shoe_size = str(cust_Shoe_size)
-        # print(cust_shirt_size)
-        str = "You have selected {customer_shoe_size} shoes Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
-        str2 = str.format(customer_shoe_size=cust_Shoe_size)
+            fulfillmentText = str2  # "You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            return {
+                "fulfillmentText": fulfillmentText}
+        else:
+            fulfillmentText = "We Donot have this Shirt Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            return {
+                "fulfillmentText": fulfillmentText}
 
-        fulfillmentText = str2  # "You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
 
-        return {
-            "fulfillmentText": fulfillmentText
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     elif (intent == 'Women-ShalwarKameez'):
@@ -200,30 +199,6 @@ def processRequest(req):
 def homePage():
 	return render_template("index.html")
 
-@app.route('/review', methods=("POST", "GET"))
-def index():
-    #if request.method == 'POST':
-    try:
-        intent = 'Shirts-size'
-        cust_shirt_size = 'M'
-        search_string = 'shirts'
-
-
-        data_scrapper_FMJ = DataCollection()
-        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
-
-        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
-
-        return render_template('review.html',
-                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
-                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
-                               search_string=search_string,  # pass the search string
-                               download_csv=download_path  # pass the download path for csv
-                               )
-
-    except Exception as e:
-        print(e)
-        return render_template("404.html")
 
 @app.route('/ShirtSizeMedium', methods=("POST", "GET"))
 def ShirtSizeMedium():
@@ -299,7 +274,108 @@ def ShirtSizeLarge():
 
 
 
+@app.route('/ShalwarKurtaSizeMedium', methods=("POST", "GET"))
+def ShirtSizeMedium():
+    #if request.method == 'POST':
+    try:
+        intent = 'Shirts-size' #ShalwarKurtaSizeMedium
+        cust_shirt_size = 'M'
+        search_string = 'shirts'
 
+
+        data_scrapper_FMJ = DataCollection()
+        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
+
+        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+
+        return render_template('review.html',
+                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
+                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               search_string=search_string,  # pass the search string
+                               download_csv=download_path  # pass the download path for csv
+                               )
+
+    except Exception as e:
+        print(e)
+        return render_template("404.html")
+
+
+@app.route('/ShirtSizeMedium', methods=("POST", "GET"))
+def ShirtSizeMedium():
+    #if request.method == 'POST':
+    try:
+        intent = 'ShalwarKurta-size'
+        cust_shirt_size = 'M'
+        search_string = 'Shalwar Kurta'
+
+
+        data_scrapper_FMJ = DataCollection()
+        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
+
+        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+
+        return render_template('review.html',
+                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
+                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               search_string=search_string,  # pass the search string
+                               download_csv=download_path  # pass the download path for csv
+                               )
+
+    except Exception as e:
+        print(e)
+        return render_template("404.html")
+
+
+@app.route('/ShalwarKurtaSizeMedium', methods=("POST", "GET"))
+def ShirtSizeMedium():
+    #if request.method == 'POST':
+    try:
+        intent = 'ShalwarKurta-size'
+        cust_shirt_size = 'M'
+        search_string = 'Shalwar Kurta'
+
+
+        data_scrapper_FMJ = DataCollection()
+        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
+
+        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+
+        return render_template('review.html',
+                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
+                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               search_string=search_string,  # pass the search string
+                               download_csv=download_path  # pass the download path for csv
+                               )
+
+    except Exception as e:
+        print(e)
+        return render_template("404.html")
+
+
+@app.route('/ShalwarKurtaSizeLarge', methods=("POST", "GET"))
+def ShirtSizeMedium():
+    #if request.method == 'POST':
+    try:
+        intent = 'ShalwarKurta-size'
+        cust_shirt_size = 'L'
+        search_string = 'Shalwar Kurta'
+
+
+        data_scrapper_FMJ = DataCollection()
+        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
+
+        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+
+        return render_template('review.html',
+                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
+                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               search_string=search_string,  # pass the search string
+                               download_csv=download_path  # pass the download path for csv
+                               )
+
+    except Exception as e:
+        print(e)
+        return render_template("404.html")
 
 
 
