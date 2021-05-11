@@ -107,7 +107,7 @@ class DataCollection:
 
     def FMJ_Scraped(self,intent,search_string,size,cat):
         #(intent, search_string, cust_ShalwarKurta_size, cat)
-
+        #kurta - shalwar
         base_URL = 'http://fmjclothing.jhapto.com/'
 
         #if (intent == 'Shirts-size'):
@@ -125,16 +125,5 @@ class DataCollection:
             i = i + 1
 
         yayvo_Scrapped = pd.DataFrame(get_data.get_data_dict())
-        #yayvo_Scrapped = yayvo_Scrapped.head(15)
+        yayvo_Scrapped = yayvo_Scrapped.head(15)
         return yayvo_Scrapped
-        # print("---------chkinggg -------------")
-        # print(yayvo_Scrapped.head())
-        # download_path = get_data.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
-        # #finish = time.perf_counter()
-        # #return yayvo_Scrapped
-        # render_template('review.html',
-        #                        tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
-        #                        titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
-        #                        search_string=search_string,  # pass the search string
-        #                        download_csv=download_path  # pass the download path for csv
-        #                        )

@@ -98,7 +98,7 @@ def processRequest(req):
                 "fulfillmentText": fulfillmentText}
         elif (cust_shirt_size == 'L'):
             str = "You have selected {customer_size} Shirt Size, Please Proceed to our FMJ Recommendation engine through given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
-            str2 = str.format(customer_size=cust_shirt_size, link="https://api-sendemails.herokuapp.com/Large")
+            str2 = str.format(customer_size=cust_shirt_size, link="https://api-sendemails.herokuapp.com/ShirtSizeLarge")
 
             fulfillmentText = str2  # "You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
             return {
@@ -132,6 +132,27 @@ def processRequest(req):
                 "fulfillmentText": fulfillmentText}
         else:
             fulfillmentText = "We Donot have this Shirt Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            return {
+                "fulfillmentText": fulfillmentText}
+
+    elif (intent == 'Women-kurti'):
+        parameters = result.get("parameters")
+        Women_Kurti_Size = parameters.get("Size")
+        if (Women_Kurti_Size == 'M'):
+            str = "You have selected {customer_size} Shirt Size, Please Proceed to our FMJ Recommendation engine through given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            str2 = str.format(customer_size=Women_Kurti_Size,
+                              link="https://api-sendemails.herokuapp.com/KurtiSizeMedium")
+
+            fulfillmentText = str2  # "You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            return {
+                "fulfillmentText": fulfillmentText}
+
+        elif (Women_Kurti_Size == 'L'):
+            str = "You have selected {customer_size} Shirt Size, Please Proceed to our FMJ Recommendation engine through given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            str2 = str.format(customer_size=Women_Kurti_Size,
+                              link="https://api-sendemails.herokuapp.com/KurtiSizeLarge")
+
+            fulfillmentText = str2  # "You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
             return {
                 "fulfillmentText": fulfillmentText}
 
@@ -246,7 +267,7 @@ def ShalwarKurtaSizeMedium():
 
         intent = 'ShalwarKurta-size'
         cust_ShalwarKurta_size = 'M'
-        search_string = 'Shalwar Kurta'
+        search_string = 'Kurta Shalwar'
         cat = 'men'
 
 
@@ -273,7 +294,7 @@ def ShalwarKurtaSizeLarge():
     try:
         intent = 'ShalwarKurta-size'
         cust_ShalwarKurta_size = 'L'
-        search_string = 'Shalwar Kurta'
+        search_string = 'Kurta Shalwar'
         cat = 'men'
 
 
@@ -295,10 +316,62 @@ def ShalwarKurtaSizeLarge():
 
 
 
+### ---------------------------------------------------------------------------------------####
+### ---------------------------------!!!  -- -   Women Fashion Starts ..... !!!! ------------------------------------------------------####
 
 
+@app.route('/KurtiSizeMedium', methods=("POST", "GET"))
+def KurtiSizeMedium():
+    #if request.method == 'POST':
+    try:
+        intent = 'Women-kurti'
+        size = 'M'
+        search_string = 'kurti'
+        cat = 'women'
 
 
+        data_scrapper_FMJ = DataCollection()
+        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, size, cat)
+
+        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+
+        return render_template('review.html',
+                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
+                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               search_string=search_string,  # pass the search string
+                               download_csv=download_path  # pass the download path for csv
+                               )
+
+    except Exception as e:
+        print(e)
+        return render_template("404.html")
+
+
+@app.route('/KurtiSizeLarge', methods=("POST", "GET"))
+def KurtiSizeLarge():
+    #if request.method == 'POST':
+    try:
+        intent = 'Women-kurti'
+        size = 'L'
+        search_string = 'kurti'
+        cat = 'women'
+
+
+        data_scrapper_FMJ = DataCollection()
+        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, size, cat)
+
+        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+
+        return render_template('review.html',
+                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
+                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               search_string=search_string,  # pass the search string
+                               download_csv=download_path  # pass the download path for csv
+                               )
+
+    except Exception as e:
+        print(e)
+        return render_template("404.html")
 
 
 if __name__ == '__main__':
