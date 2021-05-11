@@ -15,7 +15,8 @@ app = Flask(__name__)
 app.config['IMG_FOLDER'] = IMG_FOLDER
 app.config['CSV_FOLDER'] = CSV_FOLDER
 
-global intent
+intent = "shirts"
+cust_shirt_size = "S"
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -80,7 +81,7 @@ def processRequest(req):
     elif (intent == 'Shirts-size'):
         parameters = result.get("parameters")
         cust_shirt_size = parameters.get("Size")
-        index()
+        #index()
 
         #data_scrapper_FMJ = DataCollection()
         #scrapped_data = data_scrapper_FMJ.FMJ_Scraped(intent,cust_shirt_size)
@@ -188,10 +189,13 @@ def homePage():
 def index():
     #if request.method == 'POST':
     try:
-        #print(intent)
-        intent = 'Shirts-size'
-        cust_shirt_size = 'M'
-        search_string = 'shirts'
+        print(intent)
+        print(cust_shirt_size)
+        search_string = intent
+        print(search_string)
+        #intent = 'Shirts-size'
+        #cust_shirt_size = 'M'
+        #search_string = 'shirts'
         data_scrapper_FMJ = DataCollection()
         yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
 
