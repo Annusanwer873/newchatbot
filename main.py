@@ -131,7 +131,7 @@ def processRequest(req):
             return {
                 "fulfillmentText": fulfillmentText}
         else:
-            fulfillmentText = "We Donot have this Shirt Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            fulfillmentText = "We Donot have this Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
             return {
                 "fulfillmentText": fulfillmentText}
 
@@ -160,12 +160,36 @@ def processRequest(req):
     elif (intent == 'Women-ShalwarKameez'):
         parameters = result.get("parameters")
         Women_ShalwarKameez_Size = parameters.get("Women-ShalwarKameez-Size")
+        if (Women_ShalwarKameez_Size == 'M'):
+            str = "You have selected {customer_size} Shirt Size, Please Proceed to our FMJ Recommendation engine through given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            str2 = str.format(customer_size=Women_ShalwarKameez_Size,
+                              link="https://api-sendemails.herokuapp.com/WoShalwarKameezMedium")
 
-        fulfillmentText = "ok1"
+            fulfillmentText = str2  # "You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            return {
+                "fulfillmentText": fulfillmentText}
 
-        return {
-            "fulfillmentText": fulfillmentText
-        }
+        elif (Women_ShalwarKameez_Size == 'L'):
+            str = "You have selected {customer_size} Shirt Size, Please Proceed to our FMJ Recommendation engine through given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            str2 = str.format(customer_size=Women_ShalwarKameez_Size,
+                              link="https://api-sendemails.herokuapp.com/WoShalwarKameezLarge")
+
+            fulfillmentText = str2  # "You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            return {
+                "fulfillmentText": fulfillmentText}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     else:
@@ -373,6 +397,61 @@ def KurtiSizeLarge():
         print(e)
         return render_template("404.html")
 
+
+### -----------------------------------------------------------------------------------------------------------------##
+
+@app.route('/WoShalwarKameezLarge', methods=("POST", "GET"))
+def WoShalwarKameezLarge():
+    #if request.method == 'POST':
+    try:
+        intent = 'Women-ShalwarKameez'
+        size = 'L'
+        search_string = 'shalwar kameez'
+        cat = 'women'
+
+
+        data_scrapper_FMJ = DataCollection()
+        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, size, cat)
+
+        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+
+        return render_template('review.html',
+                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
+                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               search_string=search_string,  # pass the search string
+                               download_csv=download_path  # pass the download path for csv
+                               )
+
+    except Exception as e:
+        print(e)
+        return render_template("404.html")
+
+
+@app.route('/WoShalwarKameezMedium', methods=("POST", "GET"))
+def WoShalwarKameezMedium():
+    #if request.method == 'POST':
+    try:
+        intent = 'Women-ShalwarKameez'
+        size = 'M'
+        search_string = 'shalwar kameez'
+        cat = 'women'
+
+
+        data_scrapper_FMJ = DataCollection()
+        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, size, cat)
+
+        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+
+        return render_template('review.html',
+                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
+                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               search_string=search_string,  # pass the search string
+                               download_csv=download_path  # pass the download path for csv
+                               )
+
+    except Exception as e:
+        print(e)
+        return render_template("404.html")
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
