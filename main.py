@@ -136,57 +136,12 @@ def processRequest(req):
                 "fulfillmentText": fulfillmentText}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     elif (intent == 'Women-ShalwarKameez'):
         parameters = result.get("parameters")
         Women_ShalwarKameez_Size = parameters.get("Women-ShalwarKameez-Size")
 
         fulfillmentText = "ok1"
 
-        return {
-            "fulfillmentText": fulfillmentText
-        }
-
-    elif (intent == 'Women-Bags'):
-        parameters = result.get("parameters")
-        Women_Bags_Color = parameters.get("Women-Bags-Color")
-
-
-        fulfillmentText = "ok2"
-
-        return {
-            "fulfillmentText": fulfillmentText
-        }
-
-    elif (intent == 'Women-Jeans'):
-        parameters = result.get("parameters")
-        Women_Jeans_Size = parameters.get("Women-Jeans-Size")
-
-        fulfillmentText = "ok3"
-
-        return {
-            "fulfillmentText": fulfillmentText
-        }
-
-    elif (intent == 'Women-Shoes'):
-        parameters = result.get("parameters")
-        Women_Shoes_Size = parameters.get("Women-Shoes-Size")
-
-        fulfillmentText = "ok4"
         return {
             "fulfillmentText": fulfillmentText
         }
@@ -274,60 +229,11 @@ def ShirtSizeLarge():
 
 
 
-@app.route('/ShalwarKurtaSizeMedium', methods=("POST", "GET"))
-def ShirtSizeMedium():
-    #if request.method == 'POST':
-    try:
-        intent = 'Shirts-size' #ShalwarKurtaSizeMedium
-        cust_shirt_size = 'M'
-        search_string = 'shirts'
-
-
-        data_scrapper_FMJ = DataCollection()
-        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
-
-        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
-
-        return render_template('review.html',
-                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
-                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
-                               search_string=search_string,  # pass the search string
-                               download_csv=download_path  # pass the download path for csv
-                               )
-
-    except Exception as e:
-        print(e)
-        return render_template("404.html")
-
-
-@app.route('/ShirtSizeMedium', methods=("POST", "GET"))
-def ShirtSizeMedium():
-    #if request.method == 'POST':
-    try:
-        intent = 'ShalwarKurta-size'
-        cust_shirt_size = 'M'
-        search_string = 'Shalwar Kurta'
-
-
-        data_scrapper_FMJ = DataCollection()
-        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
-
-        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
-
-        return render_template('review.html',
-                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
-                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
-                               search_string=search_string,  # pass the search string
-                               download_csv=download_path  # pass the download path for csv
-                               )
-
-    except Exception as e:
-        print(e)
-        return render_template("404.html")
+### ---------------------------------------------------------------------------------------####
 
 
 @app.route('/ShalwarKurtaSizeMedium', methods=("POST", "GET"))
-def ShirtSizeMedium():
+def ShalwarKurtaSizeMedium():
     #if request.method == 'POST':
     try:
         intent = 'ShalwarKurta-size'
@@ -353,7 +259,7 @@ def ShirtSizeMedium():
 
 
 @app.route('/ShalwarKurtaSizeLarge', methods=("POST", "GET"))
-def ShirtSizeMedium():
+def ShalwarKurtaSizeLarge():
     #if request.method == 'POST':
     try:
         intent = 'ShalwarKurta-size'
