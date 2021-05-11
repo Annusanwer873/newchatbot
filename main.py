@@ -15,6 +15,8 @@ app = Flask(__name__)
 app.config['IMG_FOLDER'] = IMG_FOLDER
 app.config['CSV_FOLDER'] = CSV_FOLDER
 
+global intent
+
 @app.route('/webhook', methods=['POST'])
 def webhook():
     #print("Affan here ........")
@@ -27,6 +29,12 @@ def webhook():
     return r
 
 # processing the request from dialogflow
+# def getIntent():
+#     sessionID = req.get('responseId')
+#     result = req.get("queryResult")
+#     intent = result.get("intent").get('displayName')
+#     return intent
+
 def processRequest(req):
     sessionID = req.get('responseId')
     result = req.get("queryResult")
@@ -72,11 +80,11 @@ def processRequest(req):
     elif (intent == 'Shirts-size'):
         parameters = result.get("parameters")
         cust_shirt_size = parameters.get("Size")
+        index()
 
-
-        data_scrapper_FMJ = DataCollection()
-        scrapped_data = data_scrapper_FMJ.FMJ_Scraped(intent,cust_shirt_size)
-        print(scrapped_data)
+        #data_scrapper_FMJ = DataCollection()
+        #scrapped_data = data_scrapper_FMJ.FMJ_Scraped(intent,cust_shirt_size)
+        #print(scrapped_data)
         str = "You have selected {customer_size} Shirt Size, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
         str2 = str.format(customer_size = cust_shirt_size)
         fulfillmentText = str2#"You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
@@ -180,6 +188,7 @@ def homePage():
 def index():
     #if request.method == 'POST':
     try:
+        #print(intent)
         intent = 'Shirts-size'
         cust_shirt_size = 'M'
         search_string = 'shirts'
