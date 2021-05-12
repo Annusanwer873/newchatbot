@@ -38,6 +38,7 @@ def processRequest(req):
     sessionID = req.get('responseId')
     result = req.get("queryResult")
     intent = result.get("intent").get('displayName')
+    #global converted_cust_num
 
     if (intent == 'Get Promotional Emails'):
         parameters = result.get("parameters")
@@ -56,10 +57,11 @@ def processRequest(req):
             "fulfillmentText": fulfillmentText
         }
     elif (intent == 'Contact Customer Support'):
+
         parameters = result.get("parameters")
         cust_name = parameters.get("name")
         cust_contactnumber = parameters.get("number")
-        converted_cust_num = str(cust_contactnumber)
+        #converted_cust_num = str(cust_contactnumber)
 
         cust_email = 'affanaminn@gmail.com'
 
@@ -68,7 +70,7 @@ def processRequest(req):
         course_name = 'DS'
         email_message = template.read_course_template(course_name)
         #        email_sender.send_email_to_student(cust_email, email_message)
-        email_sender.send_email_to_support(cust_name,converted_cust_num,email_message )
+        email_sender.send_email_to_support(cust_name,cust_contactnumber,email_message )
 
         fulfillmentText = "Number has sent to the support team via email, you will be contacted shortly, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
 
