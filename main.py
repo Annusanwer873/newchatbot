@@ -179,19 +179,6 @@ def processRequest(req):
                 "fulfillmentText": fulfillmentText}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     else:
         return "nothing found"
 

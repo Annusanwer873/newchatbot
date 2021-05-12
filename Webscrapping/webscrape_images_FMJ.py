@@ -119,11 +119,16 @@ class DataCollection:
         get_data = DataCollection()
         yayvo_HTML = get_data.get_main_HTML(base_URL,cat, search_string)
         print(yayvo_HTML)
+        print("Length")
+        print(len(yayvo_HTML))
         i=0
-        while (i <= len(yayvo_HTML)):
+        #while (i <= len(yayvo_HTML)):
+        while (i < 12):
             get_data.get_final_data(yayvo_HTML, i)
             i = i + 1
 
         yayvo_Scrapped = pd.DataFrame(get_data.get_data_dict())
-        yayvo_Scrapped = yayvo_Scrapped.head(15)
+        print(yayvo_Scrapped)
+
+        #yayvo_Scrapped = yayvo_Scrapped.head(15)
         return yayvo_Scrapped
