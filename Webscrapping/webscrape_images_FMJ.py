@@ -58,7 +58,7 @@ class DataCollection:
             print("Product Size",Size_Locked)
 
 
-            self.data["Name"].append(fullnameWithSize)
+            self.data["Name"].append(producttitle)
 
 
             #self.data["Size-Of-Product"].append(Size_Locked)
