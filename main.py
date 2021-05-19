@@ -294,12 +294,14 @@ def ShalwarKurtaSizeMedium():
 
         data_scrapper_FMJ = DataCollection()
         yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, cust_ShalwarKurta_size,cat)
+        newdf = yayvo_Scrapped[
+            (yayvo_Scrapped['Size-Of-Product'] == 'S,M') | (yayvo_Scrapped['Size-Of-Product'] == 'S,M,L')]
 
-        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+        download_path = data_scrapper_FMJ.save_as_dataframe(newdf, fileName=search_string.replace("+", "_"))
 
         return render_template('review.html',
-                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
-                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               tables=[newdf.to_html(classes='data')],  # pass the df as html
+                               titles=newdf.columns.values,  # pass headers of each cols
                                search_string=search_string,  # pass the search string
                                download_csv=download_path  # pass the download path for csv
                                )
@@ -321,12 +323,14 @@ def ShalwarKurtaSizeLarge():
 
         data_scrapper_FMJ = DataCollection()
         yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, cust_ShalwarKurta_size, cat)
+        newdf = yayvo_Scrapped[
+            (yayvo_Scrapped['Size-Of-Product'] == 'S,L') | (yayvo_Scrapped['Size-Of-Product'] == 'S,M,L')]
 
-        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+        download_path = data_scrapper_FMJ.save_as_dataframe(newdf, fileName=search_string.replace("+", "_"))
 
         return render_template('review.html',
-                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
-                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               tables=[newdf.to_html(classes='data')],  # pass the df as html
+                               titles=newdf.columns.values,  # pass headers of each cols
                                search_string=search_string,  # pass the search string
                                download_csv=download_path  # pass the download path for csv
                                )
@@ -354,11 +358,15 @@ def KurtiSizeMedium():
         data_scrapper_FMJ = DataCollection()
         yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, size, cat)
 
-        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+
+        newdf = yayvo_Scrapped[
+            (yayvo_Scrapped['Size-Of-Product'] == 'S,M') | (yayvo_Scrapped['Size-Of-Product'] == 'S,M,L')]
+
+        download_path = data_scrapper_FMJ.save_as_dataframe(newdf, fileName=search_string.replace("+", "_"))
 
         return render_template('review.html',
-                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
-                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               tables=[newdf.to_html(classes='data')],  # pass the df as html
+                               titles=newdf.columns.values,  # pass headers of each cols
                                search_string=search_string,  # pass the search string
                                download_csv=download_path  # pass the download path for csv
                                )
@@ -380,12 +388,14 @@ def KurtiSizeLarge():
 
         data_scrapper_FMJ = DataCollection()
         yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, size, cat)
+        newdf = yayvo_Scrapped[
+            (yayvo_Scrapped['Size-Of-Product'] == 'S,L') | (yayvo_Scrapped['Size-Of-Product'] == 'S,M,L')]
 
-        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+        download_path = data_scrapper_FMJ.save_as_dataframe(newdf, fileName=search_string.replace("+", "_"))
 
         return render_template('review.html',
-                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
-                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               tables=[newdf.to_html(classes='data')],  # pass the df as html
+                               titles=newdf.columns.values,  # pass headers of each cols
                                search_string=search_string,  # pass the search string
                                download_csv=download_path  # pass the download path for csv
                                )
@@ -397,58 +407,58 @@ def KurtiSizeLarge():
 
 ### -----------------------------------------------------------------------------------------------------------------##
 
-@app.route('/WoShalwarKameezLarge', methods=("POST", "GET"))
-def WoShalwarKameezLarge():
-    #if request.method == 'POST':
-    try:
-        intent = 'Women-ShalwarKameez'
-        size = 'L'
-        search_string = 'shalwar kameez'
-        cat = 'women'
-
-
-        data_scrapper_FMJ = DataCollection()
-        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, size, cat)
-
-        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
-
-        return render_template('review.html',
-                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
-                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
-                               search_string=search_string,  # pass the search string
-                               download_csv=download_path  # pass the download path for csv
-                               )
-
-    except Exception as e:
-        print(e)
-        return render_template("404.html")
-
-
-@app.route('/WoShalwarKameezMedium', methods=("POST", "GET"))
-def WoShalwarKameezMedium():
-    #if request.method == 'POST':
-    try:
-        intent = 'Women-ShalwarKameez'
-        size = 'M'
-        search_string = 'shalwar kameez'
-        cat = 'women'
-
-
-        data_scrapper_FMJ = DataCollection()
-        yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, size, cat)
-
-        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
-
-        return render_template('review.html',
-                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
-                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
-                               search_string=search_string,  # pass the search string
-                               download_csv=download_path  # pass the download path for csv
-                               )
-
-    except Exception as e:
-        print(e)
-        return render_template("404.html")
+# @app.route('/WoShalwarKameezLarge', methods=("POST", "GET"))
+# def WoShalwarKameezLarge():
+#     #if request.method == 'POST':
+#     try:
+#         intent = 'Women-ShalwarKameez'
+#         size = 'L'
+#         search_string = 'shalwar kameez'
+#         cat = 'women'
+#
+#
+#         data_scrapper_FMJ = DataCollection()
+#         yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, size, cat)
+#
+#         download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+#
+#         return render_template('review.html',
+#                                tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
+#                                titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+#                                search_string=search_string,  # pass the search string
+#                                download_csv=download_path  # pass the download path for csv
+#                                )
+#
+#     except Exception as e:
+#         print(e)
+#         return render_template("404.html")
+#
+#
+# @app.route('/WoShalwarKameezMedium', methods=("POST", "GET"))
+# def WoShalwarKameezMedium():
+#     #if request.method == 'POST':
+#     try:
+#         intent = 'Women-ShalwarKameez'
+#         size = 'M'
+#         search_string = 'shalwar kameez'
+#         cat = 'women'
+#
+#
+#         data_scrapper_FMJ = DataCollection()
+#         yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, size, cat)
+#
+#         download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+#
+#         return render_template('review.html',
+#                                tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
+#                                titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+#                                search_string=search_string,  # pass the search string
+#                                download_csv=download_path  # pass the download path for csv
+#                                )
+#
+#     except Exception as e:
+#         print(e)
+#         return render_template("404.html")
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
