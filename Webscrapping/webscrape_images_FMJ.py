@@ -6,6 +6,7 @@ import time
 import os
 from flask import Flask, render_template,  session, redirect, request
 from flask_cors import CORS,cross_origin
+import re
 
 # define global paths for Image and csv folders
 #IMG_FOLDER = os.path.join('static', 'images')
@@ -40,8 +41,8 @@ class DataCollection:
         self.data = {
 		"Name": list(),
 		"Price": list(),
-        "Link-For-Product": list()
-        #"Size-Of-Product": list()
+        "Link-For-Product": list(),
+        "Size-Of-Product": list()
         }
 
     def get_final_data(self, commentbox=None, i=None):
@@ -49,7 +50,18 @@ class DataCollection:
         try:
             Row = commentbox.find_all("div", {"class": "astra-shop-summary-wrap"})
             #self.data["Name"].append(Row[i].a.img["alt"])  woocommerce-loop-product__title
-            self.data["Name"].append(Row[i].h2)
+            fullnameWithSize = Row[i].h2.get_text().strip()
+            #print(fullnameWithSize)
+            producttitle, Size = fullnameWithSize.split('[')
+            Size_Locked = Size[:-1]
+            print("Product Title",producttitle)
+            print("Product Size",Size_Locked)
+
+
+            self.data["Name"].append(fullnameWithSize)
+
+
+            #self.data["Size-Of-Product"].append(Size_Locked)
         except:
             self.data["Name"].append("No name")
 
@@ -72,12 +84,14 @@ class DataCollection:
             # self.data["Brand Name"].append("Siddiq")
         except:
             self.data["Link-For-Product"].append('none')
-        ### Work On Sizes Later
-        # try:
-        #     self.data["Size-Of-Product"].append(commentbox.find_all("div", {"class": "cstm_brnd"})[i].get_text().strip())
-        #     # self.data["Brand Name"].append("Siddiq")
-        # except:
-        #     self.data["Size-Of-Product"].append('none')
+
+        ### Work On Sizes
+
+        try:
+            self.data["Size-Of-Product"].append(Size_Locked)
+            # self.data["Brand Name"].append("Siddiq")
+        except:
+            self.data["Size-Of-Product"].append('none')
 
     def get_main_HTML(self, base_URL=None, cat = None , search_string=None):
         # construct the search url with base URL and search string

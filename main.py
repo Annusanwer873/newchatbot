@@ -202,12 +202,14 @@ def ShirtSizeMedium():
         data_scrapper_FMJ = DataCollection()
         #yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
         yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, cust_shirt_size, cat)
+        newdf = yayvo_Scrapped[
+            (yayvo_Scrapped['Size-Of-Product'] == 'S,M') | (yayvo_Scrapped['Size-Of-Product'] == 'S,M,L')]
 
-        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+        download_path = data_scrapper_FMJ.save_as_dataframe(newdf, fileName=search_string.replace("+", "_"))
 
         return render_template('review.html',
-                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
-                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               tables=[newdf.to_html(classes='data')],  # pass the df as html
+                               titles=newdf.columns.values,  # pass headers of each cols
                                search_string=search_string,  # pass the search string
                                download_csv=download_path  # pass the download path for csv
                                )
@@ -225,14 +227,15 @@ def ShirtSizeSmall():
         search_string = 'shirts'
         cat = 'men'
         data_scrapper_FMJ = DataCollection()
-        #yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
         yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, cust_shirt_size, cat)
 
-        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+        newdf = yayvo_Scrapped[yayvo_Scrapped['Size-Of-Product'] == 'S,M,L']
+
+        download_path = data_scrapper_FMJ.save_as_dataframe(newdf, fileName=search_string.replace("+", "_"))
 
         return render_template('review.html',
-                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
-                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               tables=[newdf.to_html(classes='data')],  # pass the df as html
+                               titles=newdf.columns.values,  # pass headers of each cols
                                search_string=search_string,  # pass the search string
                                download_csv=download_path  # pass the download path for csv
                                )
@@ -253,12 +256,17 @@ def ShirtSizeLarge():
         data_scrapper_FMJ = DataCollection()
         #yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, cust_shirt_size)
         yayvo_Scrapped = data_scrapper_FMJ.FMJ_Scraped(intent, search_string, cust_shirt_size, cat)
+        print("HEad ----------------------")
+        print(yayvo_Scrapped.head())
+        #newdf = yayvo_Scrapped[yayvo_Scrapped['Name'] == "Camo Shirt with Detachable Hoodie [S,L]"]
+        newdf = yayvo_Scrapped[(yayvo_Scrapped['Size-Of-Product'] == 'S,L') | (yayvo_Scrapped['Size-Of-Product'] =='S,M,L')]
 
-        download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
+        download_path = data_scrapper_FMJ.save_as_dataframe(newdf, fileName=search_string.replace("+", "_"))
+        #download_path = data_scrapper_FMJ.save_as_dataframe(yayvo_Scrapped, fileName=search_string.replace("+", "_"))
 
         return render_template('review.html',
-                               tables=[yayvo_Scrapped.to_html(classes='data')],  # pass the df as html
-                               titles=yayvo_Scrapped.columns.values,  # pass headers of each cols
+                               tables=[newdf.to_html(classes='data')],  # pass the df as html
+                               titles=newdf.columns.values,  # pass headers of each cols
                                search_string=search_string,  # pass the search string
                                download_csv=download_path  # pass the download path for csv
                                )
