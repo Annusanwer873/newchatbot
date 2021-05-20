@@ -18,27 +18,18 @@ app.config['CSV_FOLDER'] = CSV_FOLDER
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    #print("Affan here ........")
-    #print("Request:")
+
     req = request.get_json(silent=True, force=True)
-    #print(json.dumps(req, indent=4))
     res = processRequest(req)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
 
-# processing the request from dialogflow
-# def getIntent():
-#     sessionID = req.get('responseId')
-#     result = req.get("queryResult")
-#     intent = result.get("intent").get('displayName')
-#     return intent
 
 def processRequest(req):
     sessionID = req.get('responseId')
     result = req.get("queryResult")
     intent = result.get("intent").get('displayName')
-    #global converted_cust_num
 
     if (intent == 'Get Promotional Emails'):
         parameters = result.get("parameters")
@@ -72,7 +63,7 @@ def processRequest(req):
         #        email_sender.send_email_to_student(cust_email, email_message)
         email_sender.send_email_to_support(cust_name,cust_contactnumber,email_message )
 
-        fulfillmentText = "Number has sent to the support team via email, you will be contacted shortly, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+        fulfillmentText = "Your Number and Name has been sent to the support team via email, you will be contacted shortly, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
 
         return {
             "fulfillmentText": fulfillmentText
@@ -118,7 +109,7 @@ def processRequest(req):
 
 
         if (cust_ShalwarKurta_size == 'M'):
-            str = "You have selected {customer_size} Shirt Size, Please Proceed to our FMJ Recommendation engine through given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            str = "You have selected {customer_size} Shalwar Kurta Size, Please Proceed to our FMJ Recommendation engine through given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
             str2 = str.format(customer_size=cust_ShalwarKurta_size,
                               link="https://api-sendemails.herokuapp.com/ShalwarKurtaSizeMedium")
 
@@ -126,7 +117,7 @@ def processRequest(req):
             return {
                 "fulfillmentText": fulfillmentText}
         elif (cust_ShalwarKurta_size == 'L'):
-            str = "You have selected {customer_size} Shirt Size, Please Proceed to our FMJ Recommendation engine through given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            str = "You have selected {customer_size} Shalwar Kurta Size, Please Proceed to our FMJ Recommendation engine through given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
             str2 = str.format(customer_size=cust_ShalwarKurta_size, link="https://api-sendemails.herokuapp.com/ShalwarKurtaSizeLarge")
 
             fulfillmentText = str2  # "You have selected , Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
@@ -141,7 +132,7 @@ def processRequest(req):
         parameters = result.get("parameters")
         Women_Kurti_Size = parameters.get("Size")
         if (Women_Kurti_Size == 'M'):
-            str = "You have selected {customer_size} Shirt Size, Please Proceed to our FMJ Recommendation engine through given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            str = "You have selected {customer_size} Kurti Size, Please Proceed to our FMJ Recommendation engine through given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
             str2 = str.format(customer_size=Women_Kurti_Size,
                               link="https://api-sendemails.herokuapp.com/KurtiSizeMedium")
 
@@ -150,7 +141,7 @@ def processRequest(req):
                 "fulfillmentText": fulfillmentText}
 
         elif (Women_Kurti_Size == 'L'):
-            str = "You have selected {customer_size} Shirt Size, Please Proceed to our FMJ Recommendation engine through given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
+            str = "You have selected {customer_size} Kurti Size, Please Proceed to our FMJ Recommendation engine through given link \n {link} \n Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"
             str2 = str.format(customer_size=Women_Kurti_Size,
                               link="https://api-sendemails.herokuapp.com/KurtiSizeLarge")
 
