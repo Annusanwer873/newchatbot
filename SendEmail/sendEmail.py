@@ -109,10 +109,10 @@ class EmailSender:
                 print("This is the diff.\n")
 
                 with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-                    print("Working till here in Send Email to support ---5")
+                    #print("Working till here in Send Email to support ---5")
                     # smtp.login(self.msg['SENDER_EMAIL'], self.configuration['PASSWORD'])
                     smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-                    print("Working till here in Send Email to support ---6")
+                    #print("Working till here in Send Email to support ---6")
                     # smtp.send_message(msg)
                     smtp.sendmail(self.msg['From'], support_team_email, self.text)
 
