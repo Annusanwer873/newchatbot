@@ -21,6 +21,11 @@ class TemplateReader:
                 email_message = email_file.read()
                 return email_message
 
+            elif (course_name == 'DS'):
+                email_file = open("email_templates/Vision_Template.html", "r")
+                email_message = email_file.read()
+                return email_message
+
 
 
             # if (course_name=='DataScienceMasters'):

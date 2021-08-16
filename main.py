@@ -62,6 +62,8 @@ def processRequest(req):
         course_name = 'DS'
         email_message = template.read_course_template(course_name)
         #        email_sender.send_email_to_student(cust_email, email_message)
+        #print("Student name %s",cust_name)
+        #print("Student contact number %s", cust_contactnumber)
         email_sender.send_email_to_support(cust_name,cust_contactnumber,email_message )
 
         fulfillmentText = "Your Number and Name has been sent to the support team via email, you will be contacted shortly, Enter 1 for main menu and 0 to exit the chat, Thanks. !!!"

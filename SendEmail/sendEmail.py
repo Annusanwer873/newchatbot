@@ -89,6 +89,8 @@ class EmailSender:
                 # string to store the body of the mail
                 # body = "This will contain attachment"
                 converted_cust_num = str(converted_cust_num)
+                #print("student name is%s",cust_name)
+                #print("student contact no is%s", converted_cust_num)
 
                 body = body.replace('cust_name',cust_name)
                 #cust_contact2 = cust_contact.as_string()
