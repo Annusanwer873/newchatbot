@@ -43,7 +43,7 @@ def processRequest(req):
         email_message = template.read_course_template(course_name)
         email_sender.send_email_to_student(cust_email, email_message)
 
-        fulfillmentText = "I have sent the brochure and a promocode valid for 10th June 2021. You can get 20% flat discount through this promocode. Enter 1 for main menu and 0 to exit the chat"
+        fulfillmentText = "I have sent the desired course outline on the given email address. Enter 1 for main menu and 0 to exit the chat"
 
         return {
             "fulfillmentText": fulfillmentText
