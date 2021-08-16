@@ -31,12 +31,13 @@ def processRequest(req):
     result = req.get("queryResult")
     intent = result.get("intent").get('displayName')
 
-    if (intent == 'Get Promotional Emails'):
+    if (intent == 'CourseSelection'):
         parameters = result.get("parameters")
-        cust_name = parameters.get("name")
+        course_name = parameters.get("name")
+        cust_name = parameters.get("stuname")
         cust_email = parameters.get("email")
-        course_no = "1"
-        course_name = 'DataScienceMasters'
+
+        #course_name = 'DataScienceMasters'
         email_sender = EmailSender()
         template = template_reader.TemplateReader()
         email_message = template.read_course_template(course_name)

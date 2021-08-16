@@ -9,8 +9,10 @@ class EmailSender:
 
     def send_email_to_student(self, recepient_email, message):
         try:
-            EMAIL_ADDRESS = 'siddiqamin2005@gmail.com'
-            EMAIL_PASSWORD = 'siddiq2020'
+            # EMAIL_ADDRESS = 'siddiqamin2005@gmail.com'
+            # EMAIL_PASSWORD = 'siddiq2020'
+            EMAIL_ADDRESS = 'universityservice81@gmail.com'
+            EMAIL_PASSWORD = 'Iqra2020'
             #recepient_email = 'affanaminn@gmail.com'
 
             self.config_reader=ConfigReader()
