@@ -106,6 +106,7 @@ class EmailSender:
                 support_team_email = 'siddiqamin2005@gmail.com'
                 self.text = self.msg.as_string()
                 self.text2 = "Working in this"
+                print("This is the diff.\n")
 
                 with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
                     print("Working till here in Send Email to support ---5")
