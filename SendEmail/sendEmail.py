@@ -64,8 +64,10 @@ class EmailSender:
     def send_email_to_support(self,cust_name,converted_cust_num,body):
             try:
                 print("Working till here in Send Email to support ---00")
-                EMAIL_ADDRESS = 'siddiqamin2005@gmail.com'
-                EMAIL_PASSWORD = 'siddiq2020'
+                #EMAIL_ADDRESS = 'siddiqamin2005@gmail.com'
+                #EMAIL_PASSWORD = 'siddiq2020'
+                EMAIL_ADDRESS = 'universityservice81@gmail.com'
+                EMAIL_PASSWORD = 'Iqra2020'
                 print("Working till here in Send Email to support ---0.5")
                 self.config_reader = ConfigReader()
                 self.configuration = self.config_reader.read_config()
@@ -103,7 +105,10 @@ class EmailSender:
                 #txt = "Customer Name is {customer-name} and his Contactnumber is {contanct-no}"
                 #print(txt.format(customer-name=cust_name))
                 #self.support_team_email = self.configuration['SALES_TEAM_EMAIL']
-                support_team_email = 'siddiqamin2005@gmail.com'
+                ##################################################
+                #support_team_email = 'siddiqamin2005@gmail.com'
+                support_team_email = 'universityservice81@gmail.com'
+                ##################################################
                 self.text = self.msg.as_string()
                 self.text2 = "Working in this"
                 print("This is the diff.\n")
